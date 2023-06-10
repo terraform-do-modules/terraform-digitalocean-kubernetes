@@ -7,6 +7,32 @@ repos:
       - id: shellcheck
       - id: tflint
 
+  - repo: https://github.com/antonbabenko/pre-commit-terraform
+    rev: v1.50.0
+    hooks:
+      - id: terraform_fmt
+      - id: terraform_docs
+      - id: terraform_tflint
+        args:
+        - '--args=--enable-rule=terraform_deprecated_interpolation'
+        - '--args=--enable-rule=terraform_deprecated_index'
+        - '--args=--enable-rule=terraform_unused_declarations'
+        - '--args=--enable-rule=terraform_comment_syntax'
+        - '--args=--enable-rule=terraform_documented_outputs'
+        - '--args=--enable-rule=terraform_documented_variables'
+        - '--args=--enable-rule=terraform_typed_variables'
+        - '--args=--enable-rule=terraform_naming_convention'
+        - '--args=--enable-rule=terraform_required_version'
+        - '--args=--enable-rule=terraform_required_providers'
+        - '--args=--enable-rule=terraform_unused_required_providers'
+        - '--args=--enable-rule=terraform_standard_module_structure'
+        - '--args=--enable-rule=terraform_documented_required_providers'
+        - '--args=--enable-rule=terraform_documented_backend'
+        - '--args=--enable-rule=terraform_documented_sensitive_data'
+        - '--args=--enable-rule=terraform_documented_outputs'
+        - '--args=--enable-rule=terraform_documented_variables'
+  
+
   - repo: git://github.com/pre-commit/pre-commit-hooks
     rev: v4.0.1 # Use the ref you want to point at
     hooks:

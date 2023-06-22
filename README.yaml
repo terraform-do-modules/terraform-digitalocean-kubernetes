@@ -5,7 +5,7 @@
 #
 
 # Name of this project
-name : Terraform Digitalocean Droplet
+name : Terraform Digitalocean Kubernetes
 
 # License of this project
 license: "APACHE"

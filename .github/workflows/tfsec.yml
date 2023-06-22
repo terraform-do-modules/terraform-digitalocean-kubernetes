@@ -6,6 +6,7 @@ on:
 jobs:
   tfsec:
     uses: clouddrove/github-shared-workflows/.github/workflows/tfsec.yml@master
-    secrets: inherit
+    secrets:
+      GITHUB: ${{ secrets.GITHUB }}
     with:
       working_directory: '.'

@@ -101,12 +101,9 @@ variable "maintenance_policy" {
   }
   description = "Define the window updates are to be applied when auto upgrade is set to true."
 }
-//variable "taint" {
-//  type = any
-//  default = {}
-//}
 
 variable "kubeconfig_path" {
-  description = "The path to save the kubeconfig to"
+  type        = string
   default     = "./kubeonfig"
+  description = "The path to save the kubeconfig to"
 }

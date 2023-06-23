@@ -26,9 +26,9 @@ resource "digitalocean_kubernetes_cluster" "main" {
   registry_integration = var.registry_integration
 
   dynamic "node_pool" {
-    for_each = var.default_node_pool
+    for_each = var.critical_node_pool
     content {
-      name       = lookup(node_pool.value, "name", "default-node-pool")
+      name       = lookup(node_pool.value, "name", "application")
       size       = lookup(node_pool.value, "size", "s-1vcpu-2gb")
       node_count = lookup(node_pool.value, "node_count", 1)
       auto_scale = lookup(node_pool.value, "auto_scale", true)
@@ -36,6 +36,14 @@ resource "digitalocean_kubernetes_cluster" "main" {
       max_nodes  = lookup(node_pool.value, "max_nodes", 2)
       tags       = lookup(node_pool.value, "tags", null)
       labels     = lookup(node_pool.value, "labels", null)
+      dynamic "taint" {
+        for_each = lookup(node_pool.value, "taint", [])
+        content {
+          key    = lookup(taint.value, "key", null)
+          value  = lookup(taint.value, "value", null)
+          effect = lookup(taint.value, "effect", null)
+        }
+      }
     }
   }
 
@@ -54,10 +62,10 @@ resource "digitalocean_kubernetes_cluster" "main" {
 #Description : Provides a DigitalOcean Kubernetes node pool resource. While the default node pool must be defined in the digitalocean_kubernetes_cluster resource, this resource can be used to add additional ones to a cluster.
 ##--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 resource "digitalocean_kubernetes_node_pool" "main" {
-  for_each = var.enabled ? var.node_pools : {}
+  for_each = var.enabled ? var.app_node_pools : {}
 
   cluster_id = join("", digitalocean_kubernetes_cluster.main[*].id)
-  name       = lookup(each.value, "name", "node-pool")
+  name       = lookup(each.value, "name", "critical")
   size       = lookup(each.value, "size", "s-1vcpu-2gb")
   node_count = lookup(each.value, "node_count", 1)
   auto_scale = lookup(each.value, "auto_scale", true)
@@ -65,4 +73,13 @@ resource "digitalocean_kubernetes_node_pool" "main" {
   max_nodes  = lookup(each.value, "max_nodes", 2)
   tags       = lookup(each.value, "tags", null)
   labels     = lookup(each.value, "labels", null)
+
+  dynamic "taint" {
+    for_each = lookup(each.value, "taint", [])
+    content {
+      key    = taint.value["key"]
+      value  = taint.value["value"]
+      effect = taint.value["effect"]
+    }
+  }
 }

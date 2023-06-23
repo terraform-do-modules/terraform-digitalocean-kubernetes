@@ -1,7 +1,7 @@
 provider "digitalocean" {}
 
 locals {
-  name        = "app3"
+  name        = "app"
   environment = "test"
   region      = "blr1"
 }
@@ -28,8 +28,8 @@ module "cluster" {
   cluster_version = "1.27.2-do.0"
   vpc_uuid        = module.vpc.id
 
-  default_node_pool = {
-    default_node = {
+  critical_node_pool = {
+    critical_node = {
       node_count = 1
       min_nodes  = 1
       max_nodes  = 2
@@ -37,12 +37,12 @@ module "cluster" {
     }
   }
 
-  node_pools = {
-    node = {
-      size       = "s-1vcpu-2gb"
+  app_node_pools = {
+    app_node = {
       node_count = 1
       min_nodes  = 1
       max_nodes  = 2
+      size       = "s-1vcpu-2gb"
     }
   }
 }

@@ -33,6 +33,7 @@ include:
 # How to use this project
 usage: |-
   Here are some examples of how you can use this module in your inventory structure:
+  ## basic example
   ```hcl
   module "cluster" {
     source          = "terraform-do-modules/cluster/digitalocean"
@@ -43,8 +44,8 @@ usage: |-
     cluster_version = "1.27.2-do.0"
     vpc_uuid        = module.vpc.id
 
-    default_node_pool = {
-      default_node = {
+    critical_node_pool = {
+      critical_node = {
         node_count = 1
         min_nodes  = 1
         max_nodes  = 2
@@ -52,12 +53,60 @@ usage: |-
       }
     }
 
-    node_pools = {
-      node = {
+    app_node_pools = {
+      app_node = {
+        node_count = 1
+        min_nodes  = 1
+        max_nodes  = 2
+        size       = "s-1vcpu-2gb"
+      }
+    }
+  }
+    ```
+  ## complete example
+  ```hcl
+  module "cluster" {
+    source          = "terraform-do-modules/cluster/digitalocean"
+    version         = "0.15.0"
+    name            = local.name
+    environment     = local.environment
+    region          = local.region
+    cluster_version = "1.27.2-do.0"
+    vpc_uuid        = module.vpc.id
+
+    critical_node_pool = {
+      critical_node = {
+        node_count = 1
+        min_nodes  = 1
+        max_nodes  = 2
+        size       = "s-1vcpu-2gb"
+        labels     = { "cluster" = "critical-node", }
+        tags       = ["demo"]
+        taint = [
+          {
+            key    = "name"
+            value  = "default"
+            effect = "NoSchedule"
+          }
+        ]
+      }
+    }
+
+    app_node_pools = {
+      app_node = {
         size       = "s-1vcpu-2gb"
         node_count = 1
         min_nodes  = 1
         max_nodes  = 2
+        labels     = { "cluster" = "app-node" }
+        tags       = ["demo"]
+        taint = [
+          {
+            key    = "mysize"
+            value  = "large"
+            effect = "NoSchedule"
+          }
+        ]
       }
     }
   }

@@ -28,27 +28,40 @@ module "cluster" {
   cluster_version = "1.27.2-do.0"
   vpc_uuid        = module.vpc.id
 
-  default_node_pool = {
-    default_node = {
+  critical_node_pool = {
+    critical_node = {
       node_count = 1
       min_nodes  = 1
       max_nodes  = 2
       size       = "s-1vcpu-2gb"
+      labels     = { "cluster" = "critical-node", }
+      tags       = ["demo"]
+      taint = [
+        {
+          key    = "name"
+          value  = "default"
+          effect = "NoSchedule"
+        }
+      ]
     }
   }
 
-  node_pools = {
-    node1 = {
+  app_node_pools = {
+    app_node = {
       size       = "s-1vcpu-2gb"
       node_count = 1
       min_nodes  = 1
       max_nodes  = 2
-    },
-    node2 = {
-      size       = "s-1vcpu-2gb"
-      node_count = 1
-      min_nodes  = 1
-      max_nodes  = 2
+      labels     = { "cluster" = "app-node" }
+      tags       = ["demo"]
+      taint = [
+        {
+          key    = "mysize"
+          value  = "large"
+          effect = "NoSchedule"
+        }
+      ]
     }
   }
 }
+

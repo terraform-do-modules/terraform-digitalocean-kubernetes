@@ -34,7 +34,7 @@ module "cluster" {
       min_nodes  = 1
       max_nodes  = 2
       size       = "s-1vcpu-2gb"
-      labels     = { "cluster" = "critical-node", }
+      labels     = { "cluster" = "critical", }
       tags       = ["demo"]
       taint = [
         {
@@ -52,7 +52,7 @@ module "cluster" {
       node_count = 1
       min_nodes  = 1
       max_nodes  = 2
-      labels     = { "cluster" = "app-node" }
+      labels     = { "cluster" = "application" }
       tags       = ["demo"]
       taint = [
         {

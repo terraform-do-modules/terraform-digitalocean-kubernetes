@@ -5,29 +5,36 @@
 #
 
 # Name of this project
-name : Terraform Module Template
+name : Terraform Digitalocean Kubernetes
 
 # License of this project
 license: "APACHE"
 
 # Canonical GitHub repo
-github_repo: clouddrove/terraform-module-template
+github_repo: terraform-do-modules/terraform-digitalocean-kubernetes
 
 # Badges to display
 badges:
   - name: "Latest Release"
-    image: "https://img.shields.io/github/release/clouddrove/terraform-module-template.svg"
-    url: "https://github.com/clouddrove/terraform-module-template/releases/latest"
+    image: "https://img.shields.io/github/release/terraform-do-modules/terraform-digitalocean-kubernetes.svg"
+    url: "https://github.com/terraform-do-modules/terraform-digitalocean-kubernetes/releases/latest"
   - name: "tfsec"
-    image: "https://github.com/clouddrove/terraform-module-template/actions/workflows/tfsec.yml/badge.svg"
-    url: ""
+    image: "https://github.com/terraform-do-modules/terraform-digitalocean-kubernetes/actions/workflows/tfsec.yml/badge.svg"
+    url: "https://github.com/terraform-do-modules/terraform-digitalocean-kubernetes/actions/workflows/tfsec.yml"
+  - name: "Terraform"
+    image: "https://img.shields.io/badge/Terraform-v1.4.6-green"
+    url: "https://www.terraform.io"
   - name: "Licence"
     image: "https://img.shields.io/badge/License-APACHE-blue.svg"
     url: "LICENSE.md"
 
+prerequesties:
+  - name: Terraform 1.4.6
+    url: https://learn.hashicorp.com/terraform/getting-started/install.html
+
 #  description of this project
 description: |-
-  Terraform module template to create new modules using this as baseline
+  Terraform module to create Digitalocean kubernetes service resource on Digitalocean.
 # extra content
 include:
   - "terraform.md"
@@ -36,5 +43,81 @@ include:
 # How to use this project
 usage: |-
   Here are some examples of how you can use this module in your inventory structure:
+  ## basic example
   ```hcl
+  module "cluster" {
+    source          = "terraform-do-modules/cluster/digitalocean"
+    version         = "1.0.0"
+    name            = local.name
+    environment     = local.environment
+    region          = local.region
+    cluster_version = "1.27.2-do.0"
+    vpc_uuid        = module.vpc.id
+
+    critical_node_pool = {
+      critical_node = {
+        node_count = 1
+        min_nodes  = 1
+        max_nodes  = 2
+        size       = "s-1vcpu-2gb"
+      }
+    }
+
+    app_node_pools = {
+      app_node = {
+        node_count = 1
+        min_nodes  = 1
+        max_nodes  = 2
+        size       = "s-1vcpu-2gb"
+      }
+    }
+  }
+    ```
+  ## complete example
+  ```hcl
+  module "cluster" {
+    source          = "terraform-do-modules/cluster/digitalocean"
+    version         = "1.0.0"
+    name            = local.name
+    environment     = local.environment
+    region          = local.region
+    cluster_version = "1.27.2-do.0"
+    vpc_uuid        = module.vpc.id
+
+    critical_node_pool = {
+      critical_node = {
+        node_count = 1
+        min_nodes  = 1
+        max_nodes  = 2
+        size       = "s-1vcpu-2gb"
+        labels     = { "cluster" = "critical-node", }
+        tags       = ["demo"]
+        taint = [
+          {
+            key    = "name"
+            value  = "default"
+            effect = "NoSchedule"
+          }
+        ]
+      }
+    }
+
+    app_node_pools = {
+      app_node = {
+        size       = "s-1vcpu-2gb"
+        node_count = 1
+        min_nodes  = 1
+        max_nodes  = 2
+        labels     = { "cluster" = "app-node" }
+        tags       = ["demo"]
+        taint = [
+          {
+            key    = "mysize"
+            value  = "large"
+            effect = "NoSchedule"
+          }
+        ]
+      }
+    }
+  }
     ```

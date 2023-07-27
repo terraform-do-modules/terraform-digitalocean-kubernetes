@@ -208,3 +208,4 @@ terraform.tfstate
 *.iml
 *.terraform.lock.hcl
 *.lock.hcl
+*kubeconfig

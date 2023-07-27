@@ -2,7 +2,8 @@
 ## Labels module callled that will be used for naming and tags.
 ##-----------------------------------------------------------------------------
 module "labels" {
-  source      = "git::https://github.com/terraform-do-modules/terraform-digitalocean-labels.git?ref=internal-426m"
+  source      = "terraform-do-modules/labels/digitalocean"
+  version     = "1.0.0"
   name        = var.name
   environment = var.environment
   managedby   = var.managedby
@@ -54,7 +55,6 @@ resource "digitalocean_kubernetes_cluster" "main" {
       start_time = var.maintenance_policy.start_time
     }
   }
-
   tags = var.tags
 }
 
@@ -62,8 +62,7 @@ resource "digitalocean_kubernetes_cluster" "main" {
 #Description : Provides a DigitalOcean Kubernetes node pool resource. While the default node pool must be defined in the digitalocean_kubernetes_cluster resource, this resource can be used to add additional ones to a cluster.
 ##--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 resource "digitalocean_kubernetes_node_pool" "main" {
-  for_each = var.enabled ? var.app_node_pools : {}
-
+  for_each   = var.enabled ? var.app_node_pools : {}
   cluster_id = join("", digitalocean_kubernetes_cluster.main[*].id)
   name       = lookup(each.value, "name", "application")
   size       = lookup(each.value, "size", "s-1vcpu-2gb")

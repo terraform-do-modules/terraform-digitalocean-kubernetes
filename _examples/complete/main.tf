@@ -10,7 +10,8 @@ locals {
 ## VPC module call
 ##------------------------------------------------
 module "vpc" {
-  source      = "git::https://github.com/terraform-do-modules/terraform-digitalocean-vpc.git?ref=internal-423"
+  source      = "terraform-do-modules/vpc/digitalocean"
+  version     = "1.0.0"
   name        = local.name
   environment = local.environment
   region      = local.region
@@ -25,7 +26,7 @@ module "cluster" {
   name            = local.name
   environment     = local.environment
   region          = local.region
-  cluster_version = "1.27.2-do.0"
+  cluster_version = "1.27.4-do.0"
   vpc_uuid        = module.vpc.id
 
   critical_node_pool = {

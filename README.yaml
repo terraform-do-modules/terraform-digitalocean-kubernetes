@@ -37,7 +37,7 @@ usage: |-
   ```hcl
   module "cluster" {
     source          = "terraform-do-modules/cluster/digitalocean"
-    version         = "0.15.0"
+    version         = "1.0.0"
     name            = local.name
     environment     = local.environment
     region          = local.region
@@ -67,7 +67,7 @@ usage: |-
   ```hcl
   module "cluster" {
     source          = "terraform-do-modules/cluster/digitalocean"
-    version         = "0.15.0"
+    version         = "1.0.0"
     name            = local.name
     environment     = local.environment
     region          = local.region

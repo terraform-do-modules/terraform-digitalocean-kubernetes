@@ -38,7 +38,7 @@ variable "region" {
 
 variable "cluster_version" {
   type        = string
-  default     = "1.27.2"
+  default     = "1.31.1-do.5"
   description = "K8s Cluster Version."
 }
 

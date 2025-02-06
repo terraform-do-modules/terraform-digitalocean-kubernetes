@@ -31,7 +31,7 @@ resource "digitalocean_kubernetes_cluster" "main" {
     content {
       name       = lookup(node_pool.value, "name", "critical")
       size       = lookup(node_pool.value, "size", "s-1vcpu-2gb")
-      node_count = lookup(node_pool.value, "node_count", 1)
+      node_count = lookup(node_pool.value, "auto_scale", true) ? null : lookup(node_pool.value, "node_count", 1)
       auto_scale = lookup(node_pool.value, "auto_scale", true)
       min_nodes  = lookup(node_pool.value, "min_nodes", 1)
       max_nodes  = lookup(node_pool.value, "max_nodes", 2)
@@ -66,7 +66,7 @@ resource "digitalocean_kubernetes_node_pool" "main" {
   cluster_id = join("", digitalocean_kubernetes_cluster.main[*].id)
   name       = lookup(each.value, "name", "application")
   size       = lookup(each.value, "size", "s-1vcpu-2gb")
-  node_count = lookup(each.value, "node_count", 1)
+  node_count = lookup(each.value, "auto_scale", true) ? null : lookup(each.value, "node_count", 1)
   auto_scale = lookup(each.value, "auto_scale", true)
   min_nodes  = lookup(each.value, "min_nodes", 1)
   max_nodes  = lookup(each.value, "max_nodes", 2)

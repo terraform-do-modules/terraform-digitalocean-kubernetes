@@ -50,15 +50,18 @@ output "maintenance_policy_day" {
   description = "A block representing the cluster's maintenance window. Updates will be applied within this window."
 }
 output "local_file" {
-  value = join("", digitalocean_kubernetes_cluster.main[*].kube_config[0].raw_config)
+  value     = join("", digitalocean_kubernetes_cluster.main[*].kube_config[0].raw_config)
+  sensitive = true
 }
 
 output "token" {
   value       = digitalocean_kubernetes_cluster.main[*].kube_config[0].token
   description = "The token used to authenticate with the cluster."
+  sensitive   = true
 }
 
 output "cluster_ca_certificate" {
   value       = digitalocean_kubernetes_cluster.main[*].kube_config[0].cluster_ca_certificate
   description = "The certificate authority used to verify the cluster's API server."
+  sensitive   = true
 }

@@ -4,9 +4,9 @@ on:
   pull_request:
     types: [closed]
 
-jobs:
+jobs: 
   release:
-    uses: clouddrove/github-shared-workflows/.github/workflows/tag-release.yml@master
+    uses: clouddrove/github-shared-workflows/.github/workflows/tag-release.yml@88efd7724e007c8f721a219498be29e0c9ad471b # pinned to latest
     with:
       target_branch: master
     secrets:

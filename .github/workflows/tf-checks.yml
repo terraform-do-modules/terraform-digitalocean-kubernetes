@@ -1,0 +1,21 @@
+name: tf-checks
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+  workflow_dispatch:
+jobs:
+  basic-example:
+    uses: clouddrove/github-shared-workflows/.github/workflows/tf-checks.yml@88efd7724e007c8f721a219498be29e0c9ad471b # pinned to latest
+    with:
+      working_directory: './_examples/basic/'
+  complete-example:
+    uses: clouddrove/github-shared-workflows/.github/workflows/tf-checks.yml@88efd7724e007c8f721a219498be29e0c9ad471b # pinned to latest
+    with:
+      working_directory: './_examples/complete/'
+
+# Seperate Job for TFlint workflow call
+  tf-lint:
+    uses: clouddrove/github-shared-workflows/.github/workflows/tf-lint.yml@88efd7724e007c8f721a219498be29e0c9ad471b # pinned to latest
+    secrets: 
+      GITHUB: ${{ secrets.GITHUB }}

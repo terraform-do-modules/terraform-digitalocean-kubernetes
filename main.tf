@@ -3,7 +3,7 @@
 ##-----------------------------------------------------------------------------
 module "labels" {
   source      = "terraform-do-modules/labels/digitalocean"
-  version     = "1.0.1"
+  version     = "1.0.3"
   name        = var.name
   environment = var.environment
   managedby   = var.managedby

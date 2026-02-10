@@ -1,16 +1,16 @@
 name: tf-checks
 on:
   push:
-    branches: [ master ]
+    branches: [ feat/rollout-smurf ]
   pull_request:
   workflow_dispatch:
 jobs:
   basic-example:
-    uses: clouddrove/github-shared-workflows/.github/workflows/tf-checks.yml@88efd7724e007c8f721a219498be29e0c9ad471b # pinned to latest
+    uses: clouddrove/github-shared-workflows/.github/workflows/stf-checks.yml@c615ea7ef3e5beba98a335bf9acce8e67e03c755 # pinned to latest
     with:
       working_directory: './_examples/basic/'
   complete-example:
-    uses: clouddrove/github-shared-workflows/.github/workflows/tf-checks.yml@88efd7724e007c8f721a219498be29e0c9ad471b # pinned to latest
+    uses: clouddrove/github-shared-workflows/.github/workflows/stf-checks.yml@c615ea7ef3e5beba98a335bf9acce8e67e03c755 # pinned to latest
     with:
       working_directory: './_examples/complete/'
 

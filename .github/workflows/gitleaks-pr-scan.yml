@@ -1,0 +1,13 @@
+name: Gitleaks PR Secret Scan
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  gitleaks:
+    uses: clouddrove/github-shared-workflows/.github/workflows/gitleaks-pr-scan.yml@1754bbe224200aa1d820cdf795d42de54b34245f
+    secrets: inherit

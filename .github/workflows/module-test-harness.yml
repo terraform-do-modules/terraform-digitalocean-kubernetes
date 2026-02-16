@@ -9,12 +9,12 @@ permissions:
 
 jobs:
   basic-example:
-    uses: clouddrove/github-shared-workflows/.github/workflows/stf-checks.yml@bd958ead76ac7c72acf4976c244c47eef89c84f7
+    uses: clouddrove/github-shared-workflows/.github/workflows/stf-checks.yml@521761c1a5cf68d919980a2ed84b755182aeabfe
     with:
       provider: digitalocean
       working_directory: ./_examples/basic/
   complete-example:
-    uses: clouddrove/github-shared-workflows/.github/workflows/stf-checks.yml@bd958ead76ac7c72acf4976c244c47eef89c84f7
+    uses: clouddrove/github-shared-workflows/.github/workflows/stf-checks.yml@521761c1a5cf68d919980a2ed84b755182aeabfe
     with:
       provider: digitalocean
       working_directory: ./_examples/complete/

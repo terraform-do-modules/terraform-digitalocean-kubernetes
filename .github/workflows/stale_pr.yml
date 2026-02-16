@@ -7,7 +7,7 @@ on:
 
 jobs:
   call-shared-stale:
-    uses: clouddrove/github-shared-workflows/.github/workflows/stale_pr.yml@88efd7724e007c8f721a219498be29e0c9ad471b # pinned to latest
+    uses: clouddrove/github-shared-workflows/.github/workflows/stale_pr.yml@521761c1a5cf68d919980a2ed84b755182aeabfe # pinned to latest
     with: 
       days-before-issue-stale: 30
       days-before-pr-stale: 30

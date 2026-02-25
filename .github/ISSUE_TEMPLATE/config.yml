@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: CloudDrove Community
+    url: https://clouddrove.com
+    about: For general questions and community support.
+  - name: DigitalOcean Terraform Provider Docs
+    url: https://registry.terraform.io/providers/digitalocean/digitalocean/latest/docs
+    about: Official DigitalOcean Terraform provider documentation.

@@ -11,4 +11,8 @@ terraform {
       version = "~> 2.3"
     }
   }
+
+  provider_meta "digitalocean" {
+    module_name = "terraform-do-modules/terraform-digitalocean-kubernetes"
+  }
 }

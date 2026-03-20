@@ -1,12 +1,6 @@
-run "validate" {
+variables {
+}
+
+run "validate_module" {
   command = plan
-
-  plan_options {
-    refresh = false
-  }
-
-  assert {
-    condition     = true
-    error_message = "Module validation failed"
-  }
 }

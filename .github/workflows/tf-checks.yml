@@ -8,18 +8,21 @@ jobs:
   basic-example:
     uses: clouddrove/github-shared-workflows/.github/workflows/stf-checks.yml@f6cad30db3bfad5fc248a08ab65ac82eb8dbcb82 # pinned to latest
     with:
-      provider: digitalocean
+      provider: none
       working_directory: './_examples/basic/'
+      provider: none
   complete-example:
     uses: clouddrove/github-shared-workflows/.github/workflows/stf-checks.yml@f6cad30db3bfad5fc248a08ab65ac82eb8dbcb82 # pinned to latest
     with:
-      provider: digitalocean
+      provider: none
       working_directory: './_examples/complete/'
+      provider: none
   soc2-baseline-example:
     uses: clouddrove/github-shared-workflows/.github/workflows/stf-checks.yml@f6cad30db3bfad5fc248a08ab65ac82eb8dbcb82 # pinned to latest
     with:
-      provider: digitalocean
+      provider: none
       working_directory: './_examples/soc2-baseline/'
+      provider: none
 
 # Separate job for TFlint workflow call
   tf-lint:

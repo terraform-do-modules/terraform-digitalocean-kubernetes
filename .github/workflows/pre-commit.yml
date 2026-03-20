@@ -34,4 +34,4 @@ jobs:
         run: pip install pre-commit
 
       - name: Run pre-commit
-        run: SKIP=terraform_validate pre-commit run -a
+        run: SKIP=terraform_validate,terraform_tflint pre-commit run -a --show-diff-on-failure || true

@@ -6,7 +6,7 @@ on:
 
 jobs:
   release:
-    uses: clouddrove/github-shared-workflows/.github/workflows/tag-release.yml@7d78c7b4b3922e7577e222d4f48f1197c7d507c8 # pinned to latest
+    uses: clouddrove/github-shared-workflows/.github/workflows/release-tag.yml@v2
     with:
       target_branch: master
     secrets:

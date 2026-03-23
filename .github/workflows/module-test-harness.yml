@@ -2,26 +2,28 @@ name: Module Test Harness
 
 on:
   pull_request:
-    branches: [master]
 
 permissions:
   contents: read
 
 jobs:
   basic-example:
-    uses: clouddrove/github-shared-workflows/.github/workflows/stf-checks.yml@f6cad30db3bfad5fc248a08ab65ac82eb8dbcb82
+    if: github.actor != 'dependabot[bot]'
+    uses: clouddrove/github-shared-workflows/.github/workflows/stf-checks.yml@v2
     with:
       provider: digitalocean
       working_directory: ./_examples/basic/
 
   complete-example:
-    uses: clouddrove/github-shared-workflows/.github/workflows/stf-checks.yml@f6cad30db3bfad5fc248a08ab65ac82eb8dbcb82
+    if: github.actor != 'dependabot[bot]'
+    uses: clouddrove/github-shared-workflows/.github/workflows/stf-checks.yml@v2
     with:
       provider: digitalocean
       working_directory: ./_examples/complete/
 
   soc2-baseline-example:
-    uses: clouddrove/github-shared-workflows/.github/workflows/stf-checks.yml@f6cad30db3bfad5fc248a08ab65ac82eb8dbcb82
+    if: github.actor != 'dependabot[bot]'
+    uses: clouddrove/github-shared-workflows/.github/workflows/stf-checks.yml@v2
     with:
       provider: digitalocean
       working_directory: ./_examples/soc2-baseline/

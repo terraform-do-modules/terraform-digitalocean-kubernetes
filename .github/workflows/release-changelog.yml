@@ -1,21 +1,19 @@
-name: Release Changelog
+name: Release changelog
 
 on:
   release:
-    types:
-      - published
+    types: [published]
 
 permissions:
   contents: write
+  pull-requests: write
 
 jobs:
-  release-changelog:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Release changelog
-        uses: clouddrove/github-shared-workflows/.github/workflows/release-changelog.yml@v2
-        with:
-          branch: master
-        secrets:
-          GITHUB: ${{ secrets.GITHUB_TOKEN }}
+  changelog:
+    uses: clouddrove/github-shared-workflows/.github/workflows/release-changelog.yml@v2
+    with:
+      branch: master
+      tag_format: vX.Y.Z
+      release_tag: ${{ github.ref_name }}
+    secrets:
+      GITHUB: ${{ secrets.TOKEN_GITHUB }}

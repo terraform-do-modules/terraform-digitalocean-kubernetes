@@ -1,31 +1,29 @@
 name: tf-checks
+
 on:
-  push:
-    branches: [ master ]
   pull_request:
   workflow_dispatch:
+
 jobs:
   basic-example:
-    uses: clouddrove/github-shared-workflows/.github/workflows/tf-checks.yml@master
+    uses: clouddrove/github-shared-workflows/.github/workflows/stf-checks.yml@v2
     with:
-      provider: none
       working_directory: './_examples/basic/'
       provider: none
+
   complete-example:
-    uses: clouddrove/github-shared-workflows/.github/workflows/tf-checks.yml@master
+    uses: clouddrove/github-shared-workflows/.github/workflows/stf-checks.yml@v2
     with:
-      provider: none
       working_directory: './_examples/complete/'
       provider: none
+
   soc2-baseline-example:
-    uses: clouddrove/github-shared-workflows/.github/workflows/tf-checks.yml@master
+    uses: clouddrove/github-shared-workflows/.github/workflows/stf-checks.yml@v2
     with:
-      provider: none
       working_directory: './_examples/soc2-baseline/'
       provider: none
 
-# Separate job for TFlint workflow call
   tf-lint:
-    uses: clouddrove/github-shared-workflows/.github/workflows/tf-lint.yml@master
+    uses: clouddrove/github-shared-workflows/.github/workflows/tf-lint.yml@v2
     secrets:
       GITHUB: ${{ secrets.GITHUB }}

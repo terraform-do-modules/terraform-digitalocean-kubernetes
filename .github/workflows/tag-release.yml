@@ -5,9 +5,11 @@ on:
     types: [closed]
 
 jobs:
-  release:
-    uses: clouddrove/github-shared-workflows/.github/workflows/tag-release.yml@03dcb08c08de8e1798c735f548655e391f924277 # pinned to latest
+  handle-release:
+    if: github.event.pull_request.merged == true && github.actor != 'dependabot[bot]'
+    uses: clouddrove/github-shared-workflows/.github/workflows/release-tag.yml@v2
     with:
-      target_branch: master
+      target_branch: ${{ github.event.pull_request.base.ref }}
+      tag_format: "vX.Y.Z"
     secrets:
-      GITHUB: ${{ secrets.GITHUB_TOKEN }}
+      GITHUB: ${{ secrets.GITHUB }}

@@ -12,16 +12,16 @@ jobs:
     uses: clouddrove/github-shared-workflows/.github/workflows/stf-checks.yml@f6cad30db3bfad5fc248a08ab65ac82eb8dbcb82
     with:
       provider: digitalocean
-      working_directory: ./_examples/basic/
+      working_directory: ./examples/basic/
 
   complete-example:
     uses: clouddrove/github-shared-workflows/.github/workflows/stf-checks.yml@f6cad30db3bfad5fc248a08ab65ac82eb8dbcb82
     with:
       provider: digitalocean
-      working_directory: ./_examples/complete/
+      working_directory: ./examples/complete/
 
   soc2-baseline-example:
     uses: clouddrove/github-shared-workflows/.github/workflows/stf-checks.yml@f6cad30db3bfad5fc248a08ab65ac82eb8dbcb82
     with:
       provider: digitalocean
-      working_directory: ./_examples/soc2-baseline/
+      working_directory: ./examples/soc2-baseline/

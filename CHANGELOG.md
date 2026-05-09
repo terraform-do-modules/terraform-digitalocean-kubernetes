@@ -1,3 +1,8 @@
+## [v1.1.9] - 2026-05-09
+### :bug: Bug Fixes
+- [`d166cca`](https://github.com/terraform-do-modules/terraform-digitalocean-kubernetes/commit/d166ccadf3a7cc74aab00f1a961a4daab34a36fc) - add missing description for local_file output *(PR [#81](https://github.com/terraform-do-modules/terraform-digitalocean-kubernetes/pull/81) by [@clouddrove-ci](https://github.com/clouddrove-ci))*
+
+
 ## [1.1.6] - 2026-02-25
 
 ### 📚 Documentation
@@ -38,3 +43,4 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+[v1.1.9]: https://github.com/terraform-do-modules/terraform-digitalocean-kubernetes/compare/v1.1.8...v1.1.9

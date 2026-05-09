@@ -4,7 +4,7 @@ terraform {
   required_providers {
     digitalocean = {
       source  = "digitalocean/digitalocean"
-      version = ">= 2.70.0"
+      version = ">= 2.85.0"
     }
     local = {
       source  = "hashicorp/local"

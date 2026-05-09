@@ -50,8 +50,9 @@ output "maintenance_policy_day" {
   description = "A block representing the cluster's maintenance window. Updates will be applied within this window."
 }
 output "local_file" {
-  value     = join("", digitalocean_kubernetes_cluster.main[*].kube_config[0].raw_config)
-  sensitive = true
+  value       = join("", digitalocean_kubernetes_cluster.main[*].kube_config[0].raw_config)
+  description = "The raw kubeconfig content for the cluster."
+  sensitive   = true
 }
 
 output "token" {

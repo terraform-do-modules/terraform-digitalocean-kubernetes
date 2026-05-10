@@ -8,19 +8,19 @@ jobs:
   basic-example:
     uses: clouddrove/github-shared-workflows/.github/workflows/stf-checks.yml@v2
     with:
-      working_directory: './_examples/basic/'
+      working_directory: './examples/basic/'
       provider: none
 
   complete-example:
     uses: clouddrove/github-shared-workflows/.github/workflows/stf-checks.yml@v2
     with:
-      working_directory: './_examples/complete/'
+      working_directory: './examples/complete/'
       provider: none
 
   soc2-baseline-example:
     uses: clouddrove/github-shared-workflows/.github/workflows/stf-checks.yml@v2
     with:
-      working_directory: './_examples/soc2-baseline/'
+      working_directory: './examples/soc2-baseline/'
       provider: none
 
   tf-lint:
